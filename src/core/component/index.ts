@@ -1,14 +1,16 @@
 import { FC } from 'react';
 
-import { Component } from '../decorators';
+import { Injectable } from '../decorators';
 
-@Component()
+@Injectable()
 export abstract class UiComponent<Props = unknown> {
-  static key = 'Component';
+  static readonly key = 'Component';
 
   public abstract view: FC<Props>;
 }
 
 export interface UiComponentConstructor {
+  // Most optimal solution
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   new (...args: any): UiComponent;
 }

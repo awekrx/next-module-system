@@ -61,6 +61,8 @@ export class Builder {
       throw new Error('Page ' + page + ' is not compiled');
     }
 
+    // Page is not undefined
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return this.compiledPages.get(page)!;
   };
 
@@ -73,6 +75,8 @@ export class Builder {
       throw new Error('Component ' + component + ' is not compiled');
     }
 
+    // Component is not undefined
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return this.compiledComponents.get(component)!;
   };
 }

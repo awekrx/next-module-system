@@ -5,6 +5,8 @@ import { UiModule } from '../module';
 
 import { ReflectDependency } from './types';
 
+// Bind metadata module for components
+// Also registers for other dependencies (pages, etc)
 export const register = (
   container: Container,
   components: UiComponentConstructor[]

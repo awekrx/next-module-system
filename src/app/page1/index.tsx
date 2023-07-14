@@ -1,13 +1,13 @@
 import { inject } from 'inversify';
 import Link from 'next/link';
 
-import { Page } from '../../core/decorators';
+import { Injectable } from '../../core/decorators';
 import { UiPage } from '../../core/page';
 import { Module1 } from '../../modules';
 
 import { Builder } from '~/core';
 
-@Page()
+@Injectable()
 export class Page1 extends UiPage {
   constructor(@inject(Module1) private readonly module: Module1) {
     super();

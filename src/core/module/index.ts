@@ -1,33 +1,20 @@
 import { UiComponentConstructor } from '../component';
 
-import { Dispatcher, Selector } from './types';
+import { Action } from './types';
 
-export interface UiModuleShape<
-  Dispatchers extends Record<string, Dispatcher>,
-  Selectors extends Record<string, Selector>,
-  Imports extends Record<string, unknown>,
-  Components extends Record<string, UiComponentConstructor>
-> {
-  components?: Components;
-  dispatchers?: Dispatchers;
-  selectors?: Selectors;
-  imports?: Imports;
-}
+// Can add any fields to the module
 
 export abstract class UiModule<
-  Dispatchers extends Record<string, Dispatcher> = Record<string, Dispatcher>,
-  Selectors extends Record<string, Selector> = Record<string, Selector>,
+  Actions extends Record<string, Action> = Record<string, Action>,
   Imports extends Record<string, unknown> = Record<string, unknown>,
   Components extends Record<string, UiComponentConstructor> = Record<
     string,
     UiComponentConstructor
   >
-> implements UiModuleShape<Dispatchers, Selectors, Imports, Components>
-{
+> {
   static key = 'Module';
   public components: Components = {} as Components;
-  public dispatchers: Dispatchers = {} as Dispatchers;
-  public selectors: Selectors = {} as Selectors;
+  public actions: Actions = {} as Actions;
   public imports: Imports = {} as Imports;
 }
 

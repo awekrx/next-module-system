@@ -1,22 +1,9 @@
 import 'reflect-metadata';
 import { injectable } from 'inversify';
 
-// This is not a complete solution, just a snippet
-export function Page(): ClassDecorator {
-  return (target: any) => {
-    injectable()(target);
-  };
-}
-
-// This is not a complete solution, just a snippet
-export function Module(): ClassDecorator {
-  return (target: any) => {
-    injectable()(target);
-  };
-}
-
-// This is not a complete solution, just a snippet
-export function Component(): ClassDecorator {
+export function Injectable(): ClassDecorator {
+  // Only solution now, need more time to learn decorators
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (target: any) => {
     injectable()(target);
   };

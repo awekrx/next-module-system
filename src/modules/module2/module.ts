@@ -1,16 +1,16 @@
-import { Module } from '../../core/decorators';
+import { Injectable } from '../../core/decorators';
 import { UiModule } from '../../core/module';
 
 import { Component2 } from './components';
 
-@Module()
+@Injectable()
 export class Module2 extends UiModule {
-  public selectors = {
-    test: () => {
-      return;
+  actions = {
+    summary: (x: number, y: number) => {
+      return x + y;
     },
   };
-  public components = {
+  components = {
     component2: Component2,
   };
 }

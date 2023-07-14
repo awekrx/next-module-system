@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-import { Page } from '../decorators';
+import { Injectable } from '../decorators';
 
-@Page()
+@Injectable()
 export abstract class UiPage<Props = unknown> {
   static key = 'Page';
 
@@ -10,5 +10,7 @@ export abstract class UiPage<Props = unknown> {
 }
 
 export interface UiPageConstructor {
+  // Most optimal solution
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   new (...args: any): UiPage;
 }
