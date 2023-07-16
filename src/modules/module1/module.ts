@@ -1,21 +1,21 @@
-import { Injectable } from '../../core/decorators';
-import { UiModule } from '../../core/module';
-// import { importFromOtherModule } from '../../core/utils';
-// import { Module2 } from '../module2';
+import { Module2 } from '../module2';
 
-import { Component1 } from './components';
+import { ClientComponent } from './components';
+
+import { Injectable } from '~/core/decorators';
+import { UiModule, importFromOtherModule } from '~/core/module';
 
 @Injectable()
 export class Module1 extends UiModule {
-  // actions = {
-  //   echo: (word: string) => {
-  //     return word;
-  //   },
-  // };
-  components = {
-    component1: Component1,
+  actions = {
+    echo: (word: string) => {
+      return word;
+    },
   };
-  // imports = {
-  //   // summaryFromModule2: importFromOtherModule(Module2, 'actions', 'summary'),
-  // };
+  components = {
+    ClientComponent,
+  };
+  imports = {
+    summaryFromModule2: importFromOtherModule(Module2, 'actions', 'summary'),
+  };
 }

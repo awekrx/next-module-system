@@ -1,9 +1,11 @@
 import { FC, MouseEventHandler } from 'react';
 
+type OnClickButton = MouseEventHandler<HTMLButtonElement>;
+
 interface Props {
   count: number;
-  onClickAdd: MouseEventHandler<HTMLButtonElement>;
-  onClickSubtract: MouseEventHandler<HTMLButtonElement>;
+  onClickAdd: OnClickButton;
+  onClickSubtract: OnClickButton;
 }
 
 export const Component1View: FC<Props> = (props) => {

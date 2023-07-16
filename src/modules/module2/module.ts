@@ -1,7 +1,7 @@
-import { Injectable } from '../../core/decorators';
-import { UiModule } from '../../core/module';
+import { ServerComponent } from './components';
 
-import { Component2 } from './components';
+import { Injectable } from '~/core/decorators';
+import { UiModule } from '~/core/module';
 
 @Injectable()
 export class Module2 extends UiModule {
@@ -11,6 +11,6 @@ export class Module2 extends UiModule {
     },
   };
   components = {
-    component2: Component2,
+    ServerComponent,
   };
 }

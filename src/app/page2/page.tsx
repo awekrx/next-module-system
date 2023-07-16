@@ -1,13 +1,11 @@
-'use client';
-
 import { FC } from 'react';
 
 import { Page2 } from '.';
 
-import { Builder } from '~/core';
+import { Builder } from '~/core/builder';
 
 const Page2View: FC = () => {
-  const page = Builder.renderPage(Page2);
+  const page = Builder.getRenderedPage(Page2);
 
   return <page.view />;
 };

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Injectable } from '../decorators';
 
 @Injectable()
-export abstract class UiComponent<Props = unknown> {
+export abstract class UiComponent<Props = object> {
   static readonly key = 'Component';
 
   public abstract view: FC<Props>;

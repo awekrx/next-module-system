@@ -2,20 +2,19 @@
 
 import { FC, useState } from 'react';
 
-import { Component2View } from './view';
+import { Component1View } from './view';
 
-// FC<unknown> is required
-export const Component2Client: FC<unknown> = () => {
+export const Component1Client: FC = () => {
   const [count, setCount] = useState(0);
 
   const onClickAddHandler = () => setCount(count + 1);
   const onClickSubtractHandler = () => setCount(count - 1);
 
   return (
-    <Component2View
+    <Component1View
       onClickAdd={onClickAddHandler}
       onClickSubtract={onClickSubtractHandler}
       count={count}
-    ></Component2View>
+    ></Component1View>
   );
 };

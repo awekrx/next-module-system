@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { Injectable } from '../decorators';
 
 @Injectable()
-export abstract class UiPage<Props = unknown> {
-  static key = 'Page';
+export abstract class UiPage<Props = object> {
+  static readonly key = 'Page';
 
   public abstract view: FC<Props>;
 }

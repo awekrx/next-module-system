@@ -2,15 +2,12 @@ import 'reflect-metadata';
 
 import { Container } from 'inversify';
 
+import { UiComponent, UiComponentConstructor } from '../component';
+import { UiModule } from '../module';
+import { UiPage, UiPageConstructor } from '../page';
+import { register } from '../register';
+
 import * as Pages from '~/app';
-import {
-  register,
-  UiComponent,
-  UiComponentConstructor,
-  UiModule,
-  UiPage,
-  UiPageConstructor,
-} from '~/core';
 import * as ModulesAndComponents from '~/modules';
 
 export class Builder {
@@ -24,6 +21,8 @@ export class Builder {
     UiComponent
   >();
 
+  // Builds modules, set metadata, compile components and pages
+  // Once on server and once on load on client
   static init() {
     Object.values(Pages).forEach((page) => {
       this.pages.push(page);
@@ -52,7 +51,7 @@ export class Builder {
     });
   }
 
-  static renderPage = (page: UiPageConstructor): UiPage => {
+  static getRenderedPage = (page: UiPageConstructor): UiPage => {
     if (this.components.length === 0) {
       this.init();
     }
@@ -66,7 +65,9 @@ export class Builder {
     return this.compiledPages.get(page)!;
   };
 
-  static renderComponent = (component: UiComponentConstructor): UiComponent => {
+  static getRenderedComponent = (
+    component: UiComponentConstructor
+  ): UiComponent => {
     if (this.components.length === 0) {
       this.init();
     }

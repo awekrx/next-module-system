@@ -5,7 +5,7 @@ import { Injectable } from '../../core/decorators';
 import { UiPage } from '../../core/page';
 import { Module1 } from '../../modules';
 
-import { Builder } from '~/core';
+import { Builder } from '~/core/builder';
 
 @Injectable()
 export class Page1 extends UiPage {
@@ -14,13 +14,14 @@ export class Page1 extends UiPage {
   }
 
   public view = () => {
-    const component1 = Builder.renderComponent(
-      this.module.components.component1
+    const ClientComponent = Builder.getRenderedComponent(
+      this.module.components.ClientComponent
     );
 
     return (
       <div>
-        <component1.view />
+        <ClientComponent.view />
+        <hr />
         <Link href="/page2">Page 2</Link>
       </div>
     );
