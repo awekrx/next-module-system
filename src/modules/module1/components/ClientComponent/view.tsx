@@ -13,7 +13,8 @@ export const Component1View: FC<Props> = (props) => {
 
   return (
     <>
-      <div>Component 1</div>
+      <div>Client Component</div>
+      <hr />
       <div>Counter: {count}</div>
       <div>
         <button onClick={onClickAdd}>+</button>

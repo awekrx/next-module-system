@@ -8,10 +8,10 @@ import { Action, ModuleImports, Selector } from './types';
  * @template Module - The type of the module to import from.
  * @template Entity - The type of the category within the module.
  * @template Key - The type of the key representing the specific part to import.
- * @param {Module} uiModuleConstructor - The module to import from.
+ * @param {ModuleConstructor} uiModuleConstructor - The module constructor to import from.
  * @param {Entity} moduleEntity - The category within the module.
  * @param {Key} entityKey - The key representing the specific part to import.
- * @returns {Module[Entity][Key]} The imported part from the module.
+ * @returns `Module[Entity][Key]` - The imported part from the module.
  */
 export const importFromOtherModule = <
   ModuleConstructor extends UiModuleConstructor,
@@ -35,11 +35,11 @@ export abstract class UiModule<
     UiComponentConstructor
   >
 > {
-  static key = 'Module';
-  public components: Components = {} as Components;
-  public actions: Actions = {} as Actions;
-  public imports: Imports = {} as Imports;
-  public selectors: Selectors = {} as Selectors;
+  static readonly key = 'Module';
+  public readonly components: Components = {} as Components;
+  public readonly actions: Actions = {} as Actions;
+  public readonly imports: Imports = {} as Imports;
+  public readonly selectors: Selectors = {} as Selectors;
 }
 
 export interface UiModuleConstructor {

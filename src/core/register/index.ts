@@ -23,6 +23,7 @@ export const register = (
         const Module = dependency[0].value;
         const module = new Module();
 
+        // Replace constructor with class object
         container.bind<UiModule>(Module).toConstantValue(module);
       });
     }

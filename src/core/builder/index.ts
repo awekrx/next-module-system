@@ -24,10 +24,12 @@ export class Builder {
   // Builds modules, set metadata, compile components and pages
   // Once on server and once on load on client
   static init() {
+    // Get non-compiled pages
     Object.values(Pages).forEach((page) => {
       this.pages.push(page);
     });
 
+    // Get non-compiled modules and components and split them
     Object.values(ModulesAndComponents).forEach((importedModule) => {
       if (importedModule.key === 'Component') {
         this.components.push(
@@ -38,13 +40,16 @@ export class Builder {
       }
     });
 
+    // Compile modules and set them to the components
     register(this.container, this.components);
 
+    // Create array with compiled pages
     this.pages.forEach((page) => {
       const compiledPage: UiPage = this.container.resolve(page);
       this.compiledPages.set(page, compiledPage);
     });
 
+    // Create array with compiled components
     this.components.forEach((component) => {
       const compiledComponent: UiComponent = this.container.resolve(component);
       this.compiledComponents.set(component, compiledComponent);

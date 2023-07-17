@@ -1,11 +1,10 @@
 import { inject } from 'inversify';
 import Link from 'next/link';
 
-import { Injectable } from '../../core/decorators';
-import { UiPage } from '../../core/page';
-import { Module1 } from '../../modules';
-
 import { Builder } from '~/core/builder';
+import { Injectable } from '~/core/decorators';
+import { UiPage } from '~/core/page';
+import { Module1 } from '~/modules';
 
 @Injectable()
 export class Page1 extends UiPage {

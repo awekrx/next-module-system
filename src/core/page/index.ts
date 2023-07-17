@@ -5,7 +5,6 @@ import { Injectable } from '../decorators';
 @Injectable()
 export abstract class UiPage<Props = object> {
   static readonly key = 'Page';
-
   public abstract view: FC<Props>;
 }
 
