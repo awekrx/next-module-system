@@ -11,6 +11,7 @@ Open `localhost:3000`
 
 ## File structure
 
+```bash
 project/
 ├── core/
 │   ├── builder/ -> Builds modules and compile them
@@ -39,8 +40,10 @@ project/
                 ├── index.ts
                 ├── server.ts
                 └── view.tsx
+```
 
 If need hybrid component we can create component with client and server sides.
+
 `Component -> server (get data from api, send to client) -> client (get data from server side) -> view (render data)`
 
 ## Problems
