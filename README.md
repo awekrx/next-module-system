@@ -4,7 +4,7 @@
 
 ```bash
 npm ci
-npm start
+npm run docker
 ```
 
 Open `localhost:3000`

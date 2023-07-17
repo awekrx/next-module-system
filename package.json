@@ -4,6 +4,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "next dev",
+    "docker": "docker-compose up",
     "lint": "eslint src",
     "lint-fix": "eslint src --fix"
   },

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FC } from 'react';
 
-const Page2View: FC = () => {
+const Main: FC = () => {
   return (
     <>
       <div>
@@ -14,4 +14,4 @@ const Page2View: FC = () => {
   );
 };
 
-export default Page2View;
+export default Main;
