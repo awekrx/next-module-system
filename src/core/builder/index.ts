@@ -2,87 +2,68 @@ import 'reflect-metadata';
 
 import { Container } from 'inversify';
 
-import { UiComponent, UiComponentConstructor } from '../component';
-import { UiModule } from '../module';
-import { UiPage, UiPageConstructor } from '../page';
-import { register } from '../register';
+import * as units from '$modules';
 
-import * as Pages from '~/app';
-import * as ModulesAndComponents from '~/modules';
+import {
+  UiComponent,
+  UiComponentConstructor,
+  UiModuleConstructor,
+  UiPage,
+  UiPageConstructor,
+  Unit,
+} from '../units';
+import { isComponent } from '../utils/isComponent';
+import { isModule } from '../utils/isModule';
+import { isPage } from '../utils/isPage';
+import { register } from './utils';
 
 export class Builder {
   static readonly container: Container = new Container();
-  static readonly components: UiComponentConstructor[] = [];
-  static readonly modules: UiModule[] = [];
-  static readonly pages: UiPageConstructor[] = [];
-  static readonly compiledPages = new Map<UiPageConstructor, UiPage>();
-  static readonly compiledComponents = new Map<
-    UiComponentConstructor,
-    UiComponent
-  >();
+
+  static readonly raw = {
+    pages: [] as UiPageConstructor[],
+    components: [] as UiComponentConstructor[],
+    modules: [] as UiModuleConstructor[],
+  };
+
+  static readonly compiled = {
+    pages: new Map<UiPageConstructor, UiPage>(),
+    components: new Map<UiComponentConstructor, UiComponent>(),
+  };
 
   // Builds modules, set metadata, compile components and pages
   // Once on server and once on load on client
   static init() {
-    // Get non-compiled pages
-    Object.values(Pages).forEach((page) => {
-      this.pages.push(page);
-    });
-
     // Get non-compiled modules and components and split them
-    Object.values(ModulesAndComponents).forEach((importedModule) => {
-      if (importedModule.key === 'Component') {
-        this.components.push(
-          importedModule as unknown as UiComponentConstructor
-        );
-      } else if (importedModule.key === 'Module') {
-        this.modules.push(importedModule as unknown as UiModule);
+    Object.values(units).forEach((unit: Unit) => {
+      if (isComponent(unit)) {
+        this.raw.components.push(unit);
+      }
+
+      if (isModule(unit)) {
+        return this.raw.modules.push(unit);
+      }
+
+      if (isPage(unit)) {
+        return this.raw.pages.push(unit);
       }
     });
 
     // Compile modules and set them to the components
-    register(this.container, this.components);
+    register(this.container, [...this.raw.components, ...this.raw.pages]);
 
     // Create array with compiled pages
-    this.pages.forEach((page) => {
+    this.raw.pages.forEach((page) => {
       const compiledPage: UiPage = this.container.resolve(page);
-      this.compiledPages.set(page, compiledPage);
+      this.compiled.pages.set(page, compiledPage);
     });
 
     // Create array with compiled components
-    this.components.forEach((component) => {
-      const compiledComponent: UiComponent = this.container.resolve(component);
-      this.compiledComponents.set(component, compiledComponent);
+    this.raw.components.forEach((component) => {
+      const compiled: UiComponent = this.container.resolve(component);
+      this.compiled.components.set(component, compiled);
     });
   }
-
-  static getRenderedPage = (page: UiPageConstructor): UiPage => {
-    if (this.components.length === 0) {
-      this.init();
-    }
-
-    if (!this.compiledPages.has(page)) {
-      throw new Error('Page ' + page + ' is not compiled');
-    }
-
-    // Page is not undefined
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return this.compiledPages.get(page)!;
-  };
-
-  static getRenderedComponent = (
-    component: UiComponentConstructor
-  ): UiComponent => {
-    if (this.components.length === 0) {
-      this.init();
-    }
-
-    if (!this.compiledComponents.has(component)) {
-      throw new Error('Component ' + component + ' is not compiled');
-    }
-
-    // Component is not undefined
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return this.compiledComponents.get(component)!;
-  };
 }
+
+export * from './utils';

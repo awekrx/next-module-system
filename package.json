@@ -1,33 +1,62 @@
 {
-  "name": "decorators",
+  "name": "next-module-system",
   "version": "1.0.0",
+  "engineStrict": true,
+  "engines": {
+    "node": "^20.12",
+    "npm": "^10.5"
+  },
   "main": "src/index.ts",
   "scripts": {
-    "start": "next dev",
-    "docker": "docker-compose up",
-    "lint": "eslint src",
-    "lint-fix": "eslint src --fix"
+    "start": "npm run routes:build && next build && next start",
+    "dev": "concurrently \"npm run routes:dev\" \"npm run next:dev\"",
+    "routes:build": "ts-node ./scripts/buildApp/index.ts",
+    "routes:dev": "ts-node ./scripts/watch.ts",
+    "next:dev": "next dev",
+    "pretty": "prettier --write . --log-level warn",
+    "lint": "eslint . --fix",
+    "postinstall": "husky install"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier",
+      "eslint --fix"
+    ]
   },
   "dependencies": {
-    "@apollo/client": "^3.7.15",
-    "eslint": "^8.42.0",
-    "inversify": "^6.0.1",
-    "next": "^13.4.8",
+    "antd": "^5.16.1",
+    "cli-color": "^2.0.4",
+    "concurrently": "^8.2.2",
+    "inversify": "^6.0.2",
+    "next": "^14.1.4",
     "react": "^18.2.0",
-    "reflect-metadata": "^0.1.13",
-    "typescript": "^5.1.3"
+    "reflect-metadata": "^0.2.2",
+    "utility-types": "^3.11.0"
   },
   "devDependencies": {
-    "@types/node": "^20.3.1",
-    "@types/react": "^18.2.12",
-    "@types/react-dom": "^18.2.5",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.32.2",
-    "prettier": "^2.3.2",
-    "ts-node": "^10.9.1"
+    "@cspell/eslint-plugin": "^8.6.1",
+    "@types/cli-color": "^2.0.6",
+    "@types/lodash": "^4.17.0",
+    "@types/node": "^20.12.5",
+    "@types/react": "^18.2.74",
+    "@types/react-dom": "^18.2.24",
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^12.0.0",
+    "eslint-plugin-typescript-sort-keys": "^3.2.0",
+    "husky": "^8.0.3",
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.4"
   }
 }

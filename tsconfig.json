@@ -1,13 +1,13 @@
 {
   "ts-node": {
     "compilerOptions": {
-      "target": "ES2022",
+      "target": "ESNext",
       "jsx": "react-jsxdev",
       "module": "commonjs"
     }
   },
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "experimentalDecorators": true,
     "skipLibCheck": true,
@@ -23,7 +23,13 @@
     "incremental": true,
     "allowJs": true,
     "paths": {
-      "~/*": ["./src/*"]
+      "$modules": ["./src/modules/index"],
+      "$modules/*": ["./src/modules/*"],
+      "$core": ["./src/core/index"],
+      "$core/*": ["./src/core/*"],
+      "$units": ["./src/core/units/index"],
+      "$units/*": ["./src/core/units/*"],
+      "$/*": ["./src/*"]
     },
     "plugins": [
       {
