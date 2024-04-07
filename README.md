@@ -2,50 +2,68 @@
 
 ## Start
 
+### Install dependencies
+
 ```bash
 npm ci
-npm run docker
 ```
 
-Open `localhost:3000`
+### Development
+
+```bash
+npm run dev
+```
+
+### Production
+
+```bash
+npm ci
+npm run dev
+```
 
 ## File structure
 
 ```bash
 project/
 ├── core/
-│   ├── builder/ -> Builds modules and compile them
-│   ├── components/
+│   ├── index.ts
+│   ├── builder/
 │   ├── decorators/
-│   ├── fetcher/
-│   ├── module/
-│   ├── page/
-│   └── register/ -> Compiles modules and components
+│   ├── units/
+│   └── utils/
 └── modules/
-    ├── module1/
+    ├── root/ -> transform pages into '/' route
     │   ├── index.ts
     │   ├── module.ts
+    │   ├── pages/ -> like next routing
+    │   │   ├── index.ts
+    │   │   ├── page/
+    │   │   └── layout/
     │   └── components/
     │       ├── index.ts
-    │       └── (client component)/
+    │       ├── (client component)/
+    │       │   ├── index.ts
+    │       │   ├── useLogic.ts
+    │       │   └── view.tsx -> `use client` directive is required
+    │       └── (server component)/
     │           ├── index.ts
-    │           ├── client.ts -> `use only` directive is required
+    │           ├── useLogic.ts
     │           └── view.tsx
-    └── module1/
+    └── (your module)/
         ├── index.ts
         ├── module.ts
+        ├── pages/ -> like next routing
+        │   ├── index.ts
+        │   ├── page/
+        │   └── layout/
         └── components/
             ├── index.ts
+            ├── (client component)/
+            │   ├── index.ts
+            │   ├── useLogic.ts
+            │   └── view.tsx -> `use client` directive is required
             └── (server component)/
                 ├── index.ts
-                ├── server.ts
+                ├── useLogic.ts
                 └── view.tsx
 ```
-
-If need hybrid component we can create component with client and server sides.
-
-`Component -> server (get data from api, send to client) -> client (get data from server side) -> view (render data)`
-
-## Problems
-
-1. Not ability to send non-string or non-numeric props to client components because the component class is a server component
