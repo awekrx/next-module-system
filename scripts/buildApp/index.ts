@@ -1,9 +1,11 @@
 import clc from 'cli-color';
+import fs from 'fs';
 
-import { MODULES_PATH } from './constants';
+import { APP_PATH, MODULES_PATH } from './constants';
 import { createRoutesTree, getFolders } from './utils';
 
 export const buildApp = () => {
+  fs.rmSync(APP_PATH, { recursive: true, force: true });
   const folders = getFolders(MODULES_PATH);
 
   createRoutesTree({ folders });
