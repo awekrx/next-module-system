@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "npm run routes:build && next build && next start",
-    "dev": "concurrently \"npm run routes:dev\" \"npm run next:dev\"",
+    "dev": "npm run routes:build && concurrently \"npm run routes:dev\" \"npm run next:dev\"",
     "routes:build": "ts-node ./scripts/buildApp/index.ts",
     "routes:dev": "ts-node ./scripts/watch.ts",
     "next:dev": "next dev",
